@@ -1,4 +1,4 @@
-package ru.work.qa.notesapp.presentation.noteDetailsScreen
+package ru.work.qa.notesapp.presentation.ui.screens.noteDetailsScreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,17 +10,19 @@ import ru.work.qa.notesapp.domain.useCase.DeleteNoteUseCase
 import ru.work.qa.notesapp.domain.useCase.GetCurrentUserIdUseCase
 import ru.work.qa.notesapp.domain.useCase.SaveNoteUseCase
 import ru.work.qa.notesapp.domain.useCase.SubmitNoteChangesUseCase
+import ru.work.qa.notesapp.navigation.Nav
 
-class NoteDetailsViewModel @AssistedInject constructor (
+class NoteDetailsViewModel @AssistedInject constructor(
     private val submitNoteChangesUseCase: SubmitNoteChangesUseCase,
     private val deleteNoteUseCase: DeleteNoteUseCase,
     private val saveNoteUseCase: SaveNoteUseCase,
-    private val getCurrentUserIdUseCase: GetCurrentUserIdUseCase
+    private val getCurrentUserIdUseCase: GetCurrentUserIdUseCase,
+    private val nav: Nav,
 ) : ViewModel() {
 
     @AssistedFactory
     interface Factory {
-        fun create() : NoteDetailsViewModel
+        fun create(): NoteDetailsViewModel
     }
 
     fun submitChanges(noteDomainModel: NoteDomainModel) {
@@ -29,7 +31,7 @@ class NoteDetailsViewModel @AssistedInject constructor (
         }
     }
 
-    fun createNote(header : String, description : String) {
+    fun createNote(header: String, description: String) {
         viewModelScope.launch {
             val noteDomainModel = NoteDomainModel(
                 id = 0,
@@ -46,5 +48,10 @@ class NoteDetailsViewModel @AssistedInject constructor (
         viewModelScope.launch {
             deleteNoteUseCase(noteDomainModel)
         }
+        gotoHomeScreen()
+    }
+
+    fun gotoHomeScreen() {
+        nav.gotoHomeScreen()
     }
 }

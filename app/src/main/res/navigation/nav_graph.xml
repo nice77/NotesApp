@@ -5,40 +5,57 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/authenticationFragment">
 
+    <action
+        android:id="@+id/action_global_register_fragment"
+        app:destination="@id/registerFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    <action
+        android:id="@+id/action_global_auth_fragment"
+        app:destination="@id/authenticationFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    <action
+        android:id="@+id/action_global_home_fragment"
+        app:destination="@id/homeFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    <action
+        android:id="@+id/action_global_note_details_fragment"
+        app:destination="@id/noteDetailsFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
     <fragment
         android:id="@+id/registerFragment"
-        android:name="ru.work.qa.notesapp.presentation.registrationScreen.RegisterFragment"
+        android:name="ru.work.qa.notesapp.presentation.ui.screens.registrationScreen.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" >
-        <action
-            android:id="@+id/action_registerFragment_to_authenticationFragment"
-            app:destination="@id/authenticationFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_register" />
+
     <fragment
         android:id="@+id/authenticationFragment"
-        android:name="ru.work.qa.notesapp.presentation.authenticationScreen.AuthenticationFragment"
-        android:label="AuthenticationFragment" >
-        <action
-            android:id="@+id/action_authenticationFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
-        <action
-            android:id="@+id/action_authenticationFragment_to_homeFragment"
-            app:destination="@id/homeFragment"/>
-    </fragment>
+        android:name="ru.work.qa.notesapp.presentation.ui.screens.authenticationScreen.AuthenticationFragment"
+        android:label="AuthenticationFragment" />
+
     <fragment
         android:id="@+id/homeFragment"
-        android:name="ru.work.qa.notesapp.presentation.homeScreen.HomeFragment"
-        android:label="HomeFragment" >
-        <action
-            android:id="@+id/action_homeFragment_to_noteDetailsFragment"
-            app:destination="@id/noteDetailsFragment" />
-    </fragment>
+        android:name="ru.work.qa.notesapp.presentation.ui.screens.homeScreen.HomeFragment"
+        android:label="HomeFragment" />
+
     <fragment
         android:id="@+id/noteDetailsFragment"
-        android:name="ru.work.qa.notesapp.presentation.noteDetailsScreen.NoteDetailsFragment"
-        android:label="NoteDetailsFragment" >
-        <action
-            android:id="@+id/action_noteDetailsFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+        android:name="ru.work.qa.notesapp.presentation.ui.screens.noteDetailsScreen.NoteDetailsFragment"
+        android:label="NoteDetailsFragment" />
+
 </navigation>

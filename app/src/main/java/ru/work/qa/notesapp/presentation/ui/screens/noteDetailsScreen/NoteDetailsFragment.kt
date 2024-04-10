@@ -1,4 +1,4 @@
-package ru.work.qa.notesapp.presentation.noteDetailsScreen
+package ru.work.qa.notesapp.presentation.ui.screens.noteDetailsScreen
 
 import android.graphics.BitmapFactory
 import android.os.Build
@@ -85,12 +85,11 @@ class NoteDetailsFragment : Fragment(R.layout.fragment_note_details) {
                         viewModel.submitChanges(it)
                     }
                 }
-                findNavController().navigate(R.id.action_noteDetailsFragment_to_homeFragment)
+                viewModel.gotoHomeScreen()
             }
             deleteBtn.setOnClickListener {
                 noteDomainModel?.let {
                     viewModel.deleteNote(it)
-                    findNavController().navigate(R.id.action_noteDetailsFragment_to_homeFragment)
                 }
             }
             pickImageBtn.setOnClickListener {

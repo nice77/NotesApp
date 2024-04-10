@@ -1,4 +1,4 @@
-package ru.work.qa.notesapp.presentation.authenticationScreen
+package ru.work.qa.notesapp.presentation.ui.screens.authenticationScreen
 
 import android.os.Bundle
 import android.view.View
@@ -7,7 +7,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
@@ -18,8 +17,8 @@ import ru.work.qa.notesapp.di.AssistedViewModelFactory
 
 class AuthenticationFragment : Fragment(R.layout.fragment_authentication) {
 
-    private val binding : FragmentAuthenticationBinding by viewBinding(FragmentAuthenticationBinding::bind)
-    private val viewModel : AuthenticationViewModel by viewModels {
+    private val binding: FragmentAuthenticationBinding by viewBinding(FragmentAuthenticationBinding::bind)
+    private val viewModel: AuthenticationViewModel by viewModels {
         AssistedViewModelFactory(this) {
             (context?.applicationContext as App).component.authenticateViewModelFactory().create()
         }
@@ -39,7 +38,7 @@ class AuthenticationFragment : Fragment(R.layout.fragment_authentication) {
                 )
             }
             registerTv.setOnClickListener {
-                findNavController().navigate(R.id.action_authenticationFragment_to_registerFragment)
+                viewModel.gotoRegisterScreen()
             }
         }
     }
@@ -63,8 +62,7 @@ class AuthenticationFragment : Fragment(R.layout.fragment_authentication) {
                 launch {
                     viewModel.submitFlow.collect {
                         if (it) {
-                            findNavController()
-                                .navigate(R.id.action_authenticationFragment_to_homeFragment)
+                            viewModel.gotoHomeScreen()
                         }
                     }
                 }
@@ -72,7 +70,7 @@ class AuthenticationFragment : Fragment(R.layout.fragment_authentication) {
         }
     }
 
-    private fun showSnackbar(msg : String) {
+    private fun showSnackbar(msg: String) {
         Snackbar.make(requireView(), msg, Snackbar.LENGTH_LONG).show()
     }
 }

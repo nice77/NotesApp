@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.registrationScreen.RegisterFragment">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.ui.screens.registrationScreen.RegisterFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/top_gl"
@@ -16,88 +16,118 @@
     <TextView
         android:id="@+id/register_tv"
         style="@style/Text.Bold.Large"
-        app:layout_constraintTop_toBottomOf="@id/top_gl"
-        app:layout_constraintBottom_toTopOf="@id/name_et"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/register"/>
+        android:text="@string/register"
+        app:layout_constraintBottom_toTopOf="@id/name_holder_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_gl" />
 
-    <EditText
-        android:id="@+id/name_et"
-        style="@style/EditText"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/name_holder_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/register_tv"
-        app:layout_constraintBottom_toTopOf="@id/email_et"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="@dimen/horizontal_default"
+        android:layout_marginTop="@dimen/vertical_large"
+        app:boxBackgroundMode="outline"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="32dp"
-        android:hint="@string/username"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/register_tv">
 
-    <EditText
-        android:id="@+id/email_et"
-        style="@style/EditText"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name_et"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/username" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/email_holder_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/name_et"
-        app:layout_constraintBottom_toTopOf="@id/password_et"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="@dimen/horizontal_default"
+        android:layout_marginTop="@dimen/vertical_default"
+        app:boxBackgroundMode="outline"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="32dp"
-        android:hint="@string/email"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name_holder_layout">
 
-    <EditText
-        android:id="@+id/password_et"
-        style="@style/EditText"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email_et"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password_holder_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@id/email_et"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="@dimen/horizontal_default"
+        android:layout_marginTop="@dimen/vertical_default"
+        app:boxBackgroundMode="outline"
+        app:endIconMode="password_toggle"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/submit_btn"
-        android:layout_marginHorizontal="32dp"
-        android:hint="@string/password"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/email_holder_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_et"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/submit_btn"
         style="@style/Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/password_et"
-        app:layout_constraintBottom_toTopOf="@id/option_ll"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="32dp"
-        android:enabled="false"
-        android:text="@string/create_account"/>
+        android:text="@string/create_account"
+        app:layout_constraintBottom_toTopOf="@id/option_ll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password_holder_layout" />
 
     <LinearLayout
         android:id="@+id/option_ll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/submit_btn"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/bottom_gl"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="horizontal">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/submit_btn">
 
         <TextView
             style="@style/Text.Regular.ExtraSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/already_have_an_account"
-            android:layout_marginHorizontal="2dp"/>
+            android:layout_marginHorizontal="2dp"
+            android:text="@string/already_have_an_account" />
+
         <TextView
             android:id="@+id/sign_in_tv"
             style="@style/Text.Regular.ExtraSmall"
-            android:textColor="?attr/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="2dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
             android:text="@string/log_in"
-            android:layout_marginHorizontal="2dp"/>
+            android:textColor="?attr/colorPrimary" />
     </LinearLayout>
 
     <androidx.constraintlayout.widget.Guideline
@@ -105,6 +135,6 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.9"/>
+        app:layout_constraintGuide_percent="0.9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
