@@ -39,15 +39,20 @@ class NoteDetailsFragment : Fragment(R.layout.fragment_note_details) {
                 noteDescriptionEt.text.append(it.description)
             }
             editBtn.setOnClickListener {
-                noteTitleEt.isEnabled = true
-                noteDescriptionEt.isEnabled = true
-                submitBtn.visibility = View.VISIBLE
+                noteTitleEt.isEnabled = !noteTitleEt.isEnabled
+                noteDescriptionEt.isEnabled = !noteDescriptionEt.isEnabled
+                submitBtn.visibility = if (submitBtn.visibility == View.GONE) View.VISIBLE else View.GONE
+                deleteBtn.isEnabled = !deleteBtn.isEnabled
             }
             submitBtn.setOnClickListener {
                 noteTitleEt.isEnabled = false
                 noteDescriptionEt.isEnabled = false
                 it.visibility = View.GONE
-                viewModel.submitChanges(noteDomainModel!!)
+                if (noteDomainModel == null) {
+                    viewModel.createNote(noteTitleEt.text.toString(), noteDescriptionEt.text.toString())
+                } else {
+                    viewModel.submitChanges(noteDomainModel!!)
+                }
             }
             deleteBtn.setOnClickListener {
                 noteDomainModel?.let {
@@ -57,7 +62,6 @@ class NoteDetailsFragment : Fragment(R.layout.fragment_note_details) {
             }
         }
     }
-
 
     companion object {
         private const val BUNDLE_KEY = "BUNDLE_KEY"

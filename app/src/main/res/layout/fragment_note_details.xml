@@ -26,7 +26,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/note_description_et"
-        android:enabled="false"/>
+        android:enabled="false"
+        android:hint="@string/title"/>
 
     <EditText
         android:id="@+id/note_description_et"
@@ -38,7 +39,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/edit_btn"
-        android:enabled="false"/>
+        android:enabled="false"
+        android:hint="@string/description"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_upper"

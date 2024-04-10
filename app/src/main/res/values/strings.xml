@@ -13,4 +13,6 @@
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="save_changes">Save changes</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
 </resources>
