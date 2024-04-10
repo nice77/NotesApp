@@ -33,6 +33,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 notesList = mutableListOf(),
                 onItemPressed = ::onItemPressed
             )
+            fab.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_noteDetailsFragment)
+            }
         }
         observeData()
     }

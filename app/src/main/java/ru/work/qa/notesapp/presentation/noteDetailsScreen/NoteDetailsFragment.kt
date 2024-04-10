@@ -41,7 +41,7 @@ class NoteDetailsFragment : Fragment(R.layout.fragment_note_details) {
             editBtn.setOnClickListener {
                 noteTitleEt.isEnabled = !noteTitleEt.isEnabled
                 noteDescriptionEt.isEnabled = !noteDescriptionEt.isEnabled
-                submitBtn.visibility = if (submitBtn.visibility == View.GONE) View.VISIBLE else View.GONE
+                extrasBtn.visibility = if (extrasBtn.visibility == View.GONE) View.VISIBLE else View.GONE
                 deleteBtn.isEnabled = !deleteBtn.isEnabled
             }
             submitBtn.setOnClickListener {
@@ -53,6 +53,7 @@ class NoteDetailsFragment : Fragment(R.layout.fragment_note_details) {
                 } else {
                     viewModel.submitChanges(noteDomainModel!!)
                 }
+                findNavController().navigate(R.id.action_noteDetailsFragment_to_homeFragment)
             }
             deleteBtn.setOnClickListener {
                 noteDomainModel?.let {

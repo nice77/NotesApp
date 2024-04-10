@@ -8,12 +8,11 @@
     <ImageView
         android:id="@+id/note_image"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="0dp"
         android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/note_title_et"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <EditText
         android:id="@+id/note_title_et"
@@ -76,13 +75,28 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.6"/>
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/extras_btn"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:constraint_referenced_ids="pick_image_btn,submit_btn"/>
+
+    <Button
+        android:id="@+id/pick_image_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save_changes"
+        app:layout_constraintTop_toBottomOf="@id/guideline"
+        app:layout_constraintBottom_toTopOf="@id/submit_btn"
+        android:layout_margin="8dp"/>
+
     <Button
         android:id="@+id/submit_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/save_changes"
-        app:layout_constraintTop_toBottomOf="@id/guideline"
-        android:layout_margin="8dp"
-        android:visibility="gone"/>
+        app:layout_constraintTop_toBottomOf="@id/pick_image_btn"
+        android:layout_margin="8dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

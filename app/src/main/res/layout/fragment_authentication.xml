@@ -63,7 +63,8 @@
 
     <TextView
         android:id="@+id/register_tv"
-        style="@style/Text.Medium.Small"
+        style="@style/Text.Regular.ExtraSmall"
+        android:textColor="?attr/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/submit_btn"
