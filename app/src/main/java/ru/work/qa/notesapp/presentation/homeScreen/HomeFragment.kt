@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import kotlinx.coroutines.launch
 import ru.work.qa.notesapp.App
@@ -59,6 +60,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     fun onItemPressed(noteDomainModel: NoteDomainModel) {
+        val bundle = Bundle().also {
+            it.putSerializable(BUNDLE_KEY, noteDomainModel)
+        }
+        findNavController().navigate(R.id.action_homeFragment_to_noteDetailsFragment, )
+    }
 
+    companion object {
+        private const val BUNDLE_KEY = "BUNDLE_KEY"
     }
 }

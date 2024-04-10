@@ -40,6 +40,16 @@ class LocalDataDomainModelMapper @Inject constructor(
         )
     }
 
+    fun mapDomainModelToNoteEntity(noteDomainModel: NoteDomainModel) : Note {
+        return Note(
+            id = noteDomainModel.id,
+            userId = noteDomainModel.userId,
+            header = noteDomainModel.header,
+            description = noteDomainModel.description,
+            imagePath = noteDomainModel.imagePath
+        )
+    }
+
     fun mapDomainModelToUserEntity(userDomainModel: UserDomainModel) : User {
         return User(
             id = userDomainModel.id,

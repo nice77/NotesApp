@@ -8,6 +8,7 @@ import ru.work.qa.notesapp.data.di.DataModuleBinder
 import ru.work.qa.notesapp.presentation.MainActivity
 import ru.work.qa.notesapp.presentation.authenticationScreen.AuthenticationViewModel
 import ru.work.qa.notesapp.presentation.homeScreen.HomeViewModel
+import ru.work.qa.notesapp.presentation.noteDetailsScreen.NoteDetailsViewModel
 import ru.work.qa.notesapp.presentation.registrationScreen.RegisterViewModel
 
 
@@ -34,4 +35,6 @@ interface AppComponent {
     fun authenticateViewModelFactory() : AuthenticationViewModel.Factory
 
     fun homeViewModelFactory() : HomeViewModel.Factory
+
+    fun noteDetailsViewModelFactory() : NoteDetailsViewModel.Factory
 }

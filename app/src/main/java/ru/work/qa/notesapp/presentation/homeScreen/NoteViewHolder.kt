@@ -23,7 +23,6 @@ class NoteViewHolder(
         this.note = note
         binding.run {
             header.text = note.header
-            description.text = note.header
         }
     }
 

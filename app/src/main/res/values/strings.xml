@@ -10,4 +10,7 @@
     <string name="email_exists">Email exists!</string>
     <string name="wrong_credentials">Wrong credentials!</string>
     <string name="no_notes_created">No notes created!</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="save_changes">Save changes</string>
 </resources>

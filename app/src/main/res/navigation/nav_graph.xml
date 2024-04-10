@@ -28,5 +28,17 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="ru.work.qa.notesapp.presentation.homeScreen.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_noteDetailsFragment"
+            app:destination="@id/noteDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteDetailsFragment"
+        android:name="ru.work.qa.notesapp.presentation.noteDetailsScreen.NoteDetailsFragment"
+        android:label="NoteDetailsFragment" >
+        <action
+            android:id="@+id/action_noteDetailsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>

@@ -1,5 +1,7 @@
 package ru.work.qa.notesapp.domain.model
 
+import java.io.Serializable
+
 
 data class NoteDomainModel(
     val id : Long = 0,
@@ -7,4 +9,4 @@ data class NoteDomainModel(
     val header : String,
     val description : String,
     val imagePath : String
-)
+) : Serializable
