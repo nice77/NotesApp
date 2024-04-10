@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.work.qa.notesapp.domain.model.UserDomainModel
 import ru.work.qa.notesapp.domain.useCase.CreateUserUseCase
@@ -15,6 +17,10 @@ class RegisterViewModel @AssistedInject constructor(
     private val validatePasswordUseCase: ValidatePasswordUseCase,
     private val createUserUseCase: CreateUserUseCase
 ) : ViewModel() {
+
+    private val _errorFlow = MutableStateFlow<ErrorEnum?>(null)
+    val errorFlow : StateFlow<ErrorEnum?>
+        get() = _errorFlow
 
     @AssistedFactory
     interface Factory {
@@ -31,7 +37,10 @@ class RegisterViewModel @AssistedInject constructor(
 
     fun registerUser(userDomainModel: UserDomainModel) {
         viewModelScope.launch {
-            createUserUseCase(userDomainModel)
+            val result = createUserUseCase(userDomainModel)
+            if (!result) {
+                _errorFlow.emit(ErrorEnum.EMAIL_EXISTS)
+            }
         }
     }
 }

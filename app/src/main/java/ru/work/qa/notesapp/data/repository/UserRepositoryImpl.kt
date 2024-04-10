@@ -17,4 +17,11 @@ class UserRepositoryImpl @Inject constructor(
             userDao.createUser(localDataDomainModelMapper.mapDomainModelToUserEntity(userDomainModel))
         }
     }
+
+    override suspend fun containsEmail(email: String): Boolean {
+        return withContext(Dispatchers.IO) {
+            val result = userDao.findByEmail(email)
+            result != null
+        }
+    }
 }
