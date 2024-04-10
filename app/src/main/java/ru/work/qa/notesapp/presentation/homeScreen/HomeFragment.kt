@@ -52,7 +52,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     if (it.isEmpty() && adapterListIsEmpty) {
                         binding.notesRv.visibility = View.GONE
                         binding.noNotesTv.visibility = View.VISIBLE
-                    } else if (it.isNotEmpty()) {
+                    } else {
                         binding.noNotesTv.visibility = View.GONE
                         binding.notesRv.visibility = View.VISIBLE
                         (binding.notesRv.adapter as NotesAdapter).updateItems(it.toMutableList())
@@ -66,7 +66,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val bundle = Bundle().also {
             it.putSerializable(BUNDLE_KEY, noteDomainModel)
         }
-        findNavController().navigate(R.id.action_homeFragment_to_noteDetailsFragment, )
+        findNavController().navigate(R.id.action_homeFragment_to_noteDetailsFragment, bundle)
     }
 
     companion object {

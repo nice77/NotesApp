@@ -86,7 +86,7 @@
         android:id="@+id/pick_image_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/save_changes"
+        android:text="@string/pick_an_image"
         app:layout_constraintTop_toBottomOf="@id/guideline"
         app:layout_constraintBottom_toTopOf="@id/submit_btn"
         android:layout_margin="8dp"/>

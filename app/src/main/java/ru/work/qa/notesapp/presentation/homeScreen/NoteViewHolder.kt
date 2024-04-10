@@ -14,8 +14,11 @@ class NoteViewHolder(
     init {
         binding.root.setOnClickListener {
             note?.let {
-                onItemPressed
+                onItemPressed(it)
             }
+        }
+        binding.imageBtn.setOnClickListener {
+
         }
     }
 
