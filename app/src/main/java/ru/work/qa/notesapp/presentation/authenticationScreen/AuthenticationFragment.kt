@@ -58,7 +58,9 @@ class AuthenticationFragment : Fragment(R.layout.fragment_authentication) {
                 }
                 launch {
                     viewModel.submitFlow.collect {
-
+                        if (it) {
+                            findNavController().navigate(R.id.action_authenticationFragment_to_homeFragment)
+                        }
                     }
                 }
             }

@@ -6,6 +6,7 @@ import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import ru.work.qa.notesapp.data.local.database.AppDatabase
+import ru.work.qa.notesapp.data.local.database.dao.NoteDao
 import ru.work.qa.notesapp.data.local.database.dao.UserDao
 import ru.work.qa.notesapp.data.local.sharedPreferences.Keys
 
@@ -27,8 +28,10 @@ class DataModule {
     fun provideUserDao(db : AppDatabase) : UserDao = db.getUserDao()
 
     @Provides
+    fun provideNoteDao(db : AppDatabase) : NoteDao = db.getNoteDao()
+
+    @Provides
     fun providePreferences(ctx : Context) : SharedPreferences {
         return ctx.getSharedPreferences(Keys.prefsName, Context.MODE_PRIVATE)
     }
-
 }

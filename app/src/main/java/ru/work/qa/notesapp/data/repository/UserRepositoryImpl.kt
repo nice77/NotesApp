@@ -5,6 +5,7 @@ import kotlinx.coroutines.withContext
 import ru.work.qa.notesapp.data.local.database.dao.UserDao
 import ru.work.qa.notesapp.data.mapper.LocalDataDomainModelMapper
 import ru.work.qa.notesapp.domain.model.UserDomainModel
+import ru.work.qa.notesapp.domain.model.UserWithNotesDomainModel
 import ru.work.qa.notesapp.domain.repository.UserRepository
 import javax.inject.Inject
 
@@ -32,6 +33,12 @@ class UserRepositoryImpl @Inject constructor(
                 return@withContext localDataDomainModelMapper.mapUserEntityToDomainModel(result)
             }
             return@withContext null
+        }
+    }
+
+    override suspend fun findUserWithNotes(id: Long): UserWithNotesDomainModel {
+        return withContext(Dispatchers.IO) {
+            localDataDomainModelMapper.mapUserEntityToDomainModel(userDao.findUserWithNotes(id))
         }
     }
 }

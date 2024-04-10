@@ -7,6 +7,7 @@ import dagger.Component
 import ru.work.qa.notesapp.data.di.DataModuleBinder
 import ru.work.qa.notesapp.presentation.MainActivity
 import ru.work.qa.notesapp.presentation.authenticationScreen.AuthenticationViewModel
+import ru.work.qa.notesapp.presentation.homeScreen.HomeViewModel
 import ru.work.qa.notesapp.presentation.registrationScreen.RegisterViewModel
 
 
@@ -31,4 +32,6 @@ interface AppComponent {
     fun registerViewModelFactory() : RegisterViewModel.Factory
 
     fun authenticateViewModelFactory() : AuthenticationViewModel.Factory
+
+    fun homeViewModelFactory() : HomeViewModel.Factory
 }
