@@ -1,6 +1,7 @@
 package ru.work.qa.notesapp.presentation.homeScreen
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -9,12 +10,14 @@ import ru.work.qa.notesapp.domain.model.NoteDomainModel
 
 class NotesAdapter(
     val notesList : MutableList<NoteDomainModel>,
-    private val onItemPressed: (NoteDomainModel) -> Unit
+    private val onItemPressed: (NoteDomainModel) -> Unit,
+    private val onMenuButtonPressed: (NoteDomainModel, View) -> Unit
 ) : RecyclerView.Adapter<NoteViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         return NoteViewHolder(
             binding = ItemNoteBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-            onItemPressed = onItemPressed
+            onItemPressed = onItemPressed,
+            onMenuButtonPressed = onMenuButtonPressed
         )
     }
 

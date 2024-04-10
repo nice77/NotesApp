@@ -6,7 +6,7 @@ import java.io.Serializable
 data class NoteDomainModel(
     val id : Long = 0,
     val userId : Long,
-    val header : String,
-    val description : String,
-    val imagePath : String
+    var header : String,
+    var description : String,
+    var imagePath : String
 ) : Serializable

@@ -10,9 +10,11 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.work.qa.notesapp.domain.useCase.CheckUserCredentialsUseCase
+import ru.work.qa.notesapp.domain.useCase.GetCurrentUserIdUseCase
 
 class AuthenticationViewModel @AssistedInject constructor(
-    private val checkUserCredentialsUseCase: CheckUserCredentialsUseCase
+    private val checkUserCredentialsUseCase: CheckUserCredentialsUseCase,
+    private val getCurrentUserIdUseCase: GetCurrentUserIdUseCase
 ) : ViewModel() {
 
     private val _errorFlow = MutableSharedFlow<ErrorEnum>()
@@ -36,6 +38,13 @@ class AuthenticationViewModel @AssistedInject constructor(
             } else {
                 _submitFlow.emit(resultBoolean)
             }
+        }
+    }
+
+    fun isSessionActive() {
+        viewModelScope.launch {
+            val isActive = getCurrentUserIdUseCase() != -1L
+            _submitFlow.emit(isActive)
         }
     }
 }

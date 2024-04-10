@@ -29,10 +29,10 @@ class AuthenticationFragment : Fragment(R.layout.fragment_authentication) {
         super.onViewCreated(view, savedInstanceState)
 
         observeData()
+        isSessionActive()
 
         binding.run {
             submitBtn.setOnClickListener {
-                println("On button clicked")
                 viewModel.checkUserCredentials(
                     email = emailEt.text.toString(),
                     password = passwordEt.text.toString()
@@ -42,6 +42,10 @@ class AuthenticationFragment : Fragment(R.layout.fragment_authentication) {
                 findNavController().navigate(R.id.action_authenticationFragment_to_registerFragment)
             }
         }
+    }
+
+    private fun isSessionActive() {
+        viewModel.isSessionActive()
     }
 
     private fun observeData() {
@@ -59,7 +63,8 @@ class AuthenticationFragment : Fragment(R.layout.fragment_authentication) {
                 launch {
                     viewModel.submitFlow.collect {
                         if (it) {
-                            findNavController().navigate(R.id.action_authenticationFragment_to_homeFragment)
+                            findNavController()
+                                .navigate(R.id.action_authenticationFragment_to_homeFragment)
                         }
                     }
                 }

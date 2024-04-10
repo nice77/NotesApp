@@ -2,6 +2,7 @@ package ru.work.qa.notesapp.presentation.homeScreen
 
 import android.os.Bundle
 import android.view.View
+import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -31,13 +32,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.run {
             notesRv.adapter = NotesAdapter(
                 notesList = mutableListOf(),
-                onItemPressed = ::onItemPressed
+                onItemPressed = ::onItemPressed,
+                onMenuButtonPressed = ::onMenuButtonPressed
             )
             fab.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_noteDetailsFragment)
             }
         }
         observeData()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        fetchNotes()
     }
 
     private fun fetchNotes() {
@@ -67,6 +74,26 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             it.putSerializable(BUNDLE_KEY, noteDomainModel)
         }
         findNavController().navigate(R.id.action_homeFragment_to_noteDetailsFragment, bundle)
+    }
+
+    fun deleteNote(noteDomainModel: NoteDomainModel) {
+        viewModel.deleteNote(noteDomainModel)
+    }
+
+    fun onMenuButtonPressed(noteDomainModel: NoteDomainModel, view : View) {
+        val menu = PopupMenu(requireContext(), view)
+        menu.menuInflater.inflate(R.menu.popup_menu, menu.menu)
+        menu.setOnMenuItemClickListener { item ->
+            return@setOnMenuItemClickListener when (item.itemId) {
+                R.id.delete_btn -> {
+                    deleteNote(noteDomainModel)
+                    fetchNotes()
+                    true
+                }
+                else -> false
+            }
+        }
+        menu.show()
     }
 
     companion object {

@@ -8,10 +8,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.work.qa.notesapp.domain.model.NoteDomainModel
+import ru.work.qa.notesapp.domain.useCase.DeleteNoteUseCase
 import ru.work.qa.notesapp.domain.useCase.FetchNotesUseCase
 
 class HomeViewModel @AssistedInject constructor(
-    private val fetchNotesUseCase: FetchNotesUseCase
+    private val fetchNotesUseCase: FetchNotesUseCase,
+    private val deleteNoteUseCase: DeleteNoteUseCase
 ): ViewModel() {
 
     private val _notesListFlow = MutableStateFlow<List<NoteDomainModel>>(listOf())
@@ -26,6 +28,12 @@ class HomeViewModel @AssistedInject constructor(
     fun fetchNotes() {
         viewModelScope.launch {
             _notesListFlow.emit(fetchNotesUseCase())
+        }
+    }
+
+    fun deleteNote(noteDomainModel: NoteDomainModel) {
+        viewModelScope.launch {
+            deleteNoteUseCase(noteDomainModel)
         }
     }
 }
