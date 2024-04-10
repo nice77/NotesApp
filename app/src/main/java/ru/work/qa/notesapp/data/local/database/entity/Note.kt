@@ -1,4 +1,4 @@
-package ru.work.qa.notesapp.data.local.entity
+package ru.work.qa.notesapp.data.local.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

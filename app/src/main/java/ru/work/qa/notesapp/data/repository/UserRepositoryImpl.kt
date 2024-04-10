@@ -2,7 +2,7 @@ package ru.work.qa.notesapp.data.repository
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import ru.work.qa.notesapp.data.local.dao.UserDao
+import ru.work.qa.notesapp.data.local.database.dao.UserDao
 import ru.work.qa.notesapp.data.mapper.LocalDataDomainModelMapper
 import ru.work.qa.notesapp.domain.model.UserDomainModel
 import ru.work.qa.notesapp.domain.repository.UserRepository
@@ -20,8 +20,18 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun containsEmail(email: String): Boolean {
         return withContext(Dispatchers.IO) {
-            val result = userDao.findByEmail(email)
+            val result = userDao.containsEmail(email)
             result != null
+        }
+    }
+
+    override suspend fun findByEmail(email: String): UserDomainModel? {
+        return withContext(Dispatchers.IO) {
+            val result = userDao.findByEmail(email)
+            result?.let {
+                return@withContext localDataDomainModelMapper.mapUserEntityToDomainModel(result)
+            }
+            return@withContext null
         }
     }
 }

@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
@@ -50,6 +51,9 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                     password = passwordEt.text.toString()
                 )
                 viewModel.registerUser(newUser)
+            }
+            signInTv.setOnClickListener {
+                findNavController().navigate(R.id.action_registerFragment_to_authenticationFragment)
             }
         }
     }

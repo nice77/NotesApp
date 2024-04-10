@@ -7,4 +7,6 @@ interface UserRepository {
     suspend fun createUser(userDomainModel: UserDomainModel)
 
     suspend fun containsEmail(email : String) : Boolean
+
+    suspend fun findByEmail(email : String) : UserDomainModel?
 }

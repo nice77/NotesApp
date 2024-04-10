@@ -1,6 +1,6 @@
 package ru.work.qa.notesapp.data.mapper
 
-import ru.work.qa.notesapp.data.local.entity.User
+import ru.work.qa.notesapp.data.local.database.entity.User
 import ru.work.qa.notesapp.domain.model.UserDomainModel
 import javax.inject.Inject
 
