@@ -1,19 +1,31 @@
 <resources>
     <string name="app_name">NotesApp</string>
-    <string name="register">Register</string>
+
+    <!-- REGISTRATION SCREEN -->
+    <string name="register">Registration</string>
     <string name="username">Username</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="create_account">Create account</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="log_in">Log in</string>
+    <!-- REGISTRATION SCREEN END -->
+
+    <!-- ERRORS -->
     <string name="email_exists">Email exists!</string>
+    <string name="email_wrong_format">Enter valid email</string>
+    <string name="password_wrong_format">Enter valid password</string>
     <string name="wrong_credentials">Wrong credentials!</string>
     <string name="no_notes_created">No notes created!</string>
+    <string name="empty_username">Username is empty</string>
+    <!-- ERRORS END -->
+
+    <!-- NOTE DETAILS -->
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="save_changes">Save changes</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
     <string name="pick_an_image">Pick an image</string>
+    <!-- NOTE DETAILS END -->
 </resources>

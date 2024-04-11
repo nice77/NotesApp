@@ -10,7 +10,7 @@ class ValidatePasswordUseCase @Inject constructor(
         return password.matches(regex)
     }
 
-    companion object {
+    private companion object {
         private val regex = Regex("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%^&*]).{8,}\$")
     }
 }

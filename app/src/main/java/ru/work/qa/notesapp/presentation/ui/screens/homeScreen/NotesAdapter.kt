@@ -1,4 +1,4 @@
-package ru.work.qa.notesapp.presentation.homeScreen
+package ru.work.qa.notesapp.presentation.ui.screens.homeScreen
 
 import android.view.LayoutInflater
 import android.view.View

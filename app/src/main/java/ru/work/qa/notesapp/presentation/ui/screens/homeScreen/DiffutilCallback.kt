@@ -1,4 +1,4 @@
-package ru.work.qa.notesapp.presentation.homeScreen
+package ru.work.qa.notesapp.presentation.ui.screens.homeScreen
 
 import androidx.recyclerview.widget.DiffUtil
 import ru.work.qa.notesapp.domain.model.NoteDomainModel

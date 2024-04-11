@@ -1,14 +1,14 @@
-package ru.work.qa.notesapp.presentation.homeScreen
+package ru.work.qa.notesapp.presentation.ui.screens.homeScreen
 
 import android.os.Bundle
 import android.view.View
 import android.widget.PopupMenu
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import kotlinx.coroutines.launch
 import ru.work.qa.notesapp.App
@@ -19,8 +19,8 @@ import ru.work.qa.notesapp.domain.model.NoteDomainModel
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
-    private val binding : FragmentHomeBinding by viewBinding(FragmentHomeBinding::bind)
-    private val viewModel : HomeViewModel by viewModels {
+    private val binding: FragmentHomeBinding by viewBinding(FragmentHomeBinding::bind)
+    private val viewModel: HomeViewModel by viewModels {
         AssistedViewModelFactory(this) {
             (context?.applicationContext as App).component.homeViewModelFactory().create()
         }
@@ -36,7 +36,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 onMenuButtonPressed = ::onMenuButtonPressed
             )
             fab.setOnClickListener {
-                findNavController().navigate(R.id.action_homeFragment_to_noteDetailsFragment)
+                viewModel.gotoNoteDetailsScreen(bundle = null)
             }
         }
         observeData()
@@ -70,17 +70,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     fun onItemPressed(noteDomainModel: NoteDomainModel) {
-        val bundle = Bundle().also {
-            it.putSerializable(BUNDLE_KEY, noteDomainModel)
-        }
-        findNavController().navigate(R.id.action_homeFragment_to_noteDetailsFragment, bundle)
+        viewModel.gotoNoteDetailsScreen(bundle = bundleOf(BUNDLE_KEY to noteDomainModel))
     }
 
     fun deleteNote(noteDomainModel: NoteDomainModel) {
         viewModel.deleteNote(noteDomainModel)
     }
 
-    fun onMenuButtonPressed(noteDomainModel: NoteDomainModel, view : View) {
+    fun onMenuButtonPressed(noteDomainModel: NoteDomainModel, view: View) {
         val menu = PopupMenu(requireContext(), view)
         menu.menuInflater.inflate(R.menu.popup_menu, menu.menu)
         menu.setOnMenuItemClickListener { item ->
@@ -90,6 +87,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     fetchNotes()
                     true
                 }
+
                 else -> false
             }
         }
