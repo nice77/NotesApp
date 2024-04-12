@@ -17,44 +17,66 @@
         android:id="@+id/sign_in_tv"
         style="@style/Text.Bold.Large"
         app:layout_constraintTop_toBottomOf="@id/top_gl"
-        app:layout_constraintBottom_toTopOf="@id/email_et"
+        app:layout_constraintBottom_toTopOf="@id/email_holder_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/log_in"/>
 
-    <EditText
-        android:id="@+id/email_et"
-        style="@style/EditText"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/email_holder_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/horizontal_default"
+        android:layout_marginTop="@dimen/vertical_default"
+        app:boxBackgroundMode="outline"
+        app:errorEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sign_in_tv"
-        app:layout_constraintBottom_toTopOf="@id/password_et"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="32dp"
-        android:hint="@string/email"/>
+        app:layout_constraintBottom_toTopOf="@id/password_holder_layout">
 
-    <EditText
-        android:id="@+id/password_et"
-        style="@style/EditText"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email_et"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password_holder_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@id/email_et"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="@dimen/horizontal_default"
+        android:layout_marginTop="@dimen/vertical_default"
+        app:boxBackgroundMode="outline"
+        app:endIconMode="password_toggle"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/submit_btn"
-        android:layout_marginHorizontal="32dp"
-        android:hint="@string/password"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/email_holder_layout"
+        app:layout_constraintBottom_toTopOf="@id/submit_btn">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_et"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/submit_btn"
         style="@style/Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/password_et"
+        app:layout_constraintTop_toBottomOf="@id/password_holder_layout"
         app:layout_constraintBottom_toTopOf="@id/register_tv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

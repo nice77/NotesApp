@@ -44,8 +44,8 @@ class NoteDetailsFragment : Fragment(R.layout.fragment_note_details) {
 
         binding.run {
             noteDomainModel?.let {
-                noteTitleEt.text.append(it.header)
-                noteDescriptionEt.text.append(it.description)
+                noteTitleEt.text?.append(it.header)
+                noteDescriptionEt.text?.append(it.description)
                 val bitmap = BitmapFactory.decodeFile(it.imagePath)
                 noteImage.setImageBitmap(bitmap)
             }
@@ -78,6 +78,8 @@ class NoteDetailsFragment : Fragment(R.layout.fragment_note_details) {
                     )
                 } else {
                     noteDomainModel?.let {
+                        it.header = noteTitleEt.text.toString()
+                        it.description = noteDescriptionEt.text.toString()
                         viewModel.submitChanges(it)
                     }
                 }
