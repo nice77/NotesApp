@@ -11,11 +11,13 @@ import kotlinx.coroutines.launch
 import ru.work.qa.notesapp.domain.model.NoteDomainModel
 import ru.work.qa.notesapp.domain.useCase.DeleteNoteUseCase
 import ru.work.qa.notesapp.domain.useCase.FetchNotesUseCase
+import ru.work.qa.notesapp.domain.useCase.LogoutUseCase
 import ru.work.qa.notesapp.navigation.Nav
 
 class HomeViewModel @AssistedInject constructor(
     private val fetchNotesUseCase: FetchNotesUseCase,
     private val deleteNoteUseCase: DeleteNoteUseCase,
+    private val logoutUseCase: LogoutUseCase,
     private val nav: Nav,
 ) : ViewModel() {
 
@@ -42,5 +44,16 @@ class HomeViewModel @AssistedInject constructor(
 
     fun gotoNoteDetailsScreen(bundle: Bundle?) {
         nav.gotoNoteDetailsScreen(bundle = bundle)
+    }
+
+    fun gotoAuthScreen() {
+        nav.gotoAuthScreen()
+    }
+
+    fun removeCurrentUser() {
+        viewModelScope.launch {
+            logoutUseCase()
+            gotoAuthScreen()
+        }
     }
 }

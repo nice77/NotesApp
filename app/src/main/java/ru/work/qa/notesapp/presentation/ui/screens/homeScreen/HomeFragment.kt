@@ -5,6 +5,8 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.PopupMenu
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -31,6 +33,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
+    private val fromBottom : Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.from_bottom_animation) }
+    private val toBottom : Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.to_bottom_animation) }
+
+    private var opened = false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fetchNotes()
@@ -41,12 +48,36 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 onMenuButtonPressed = ::onMenuButtonPressed,
                 requireImageBitmap = ::requireImageBitmap
             )
-            fab.setOnClickListener {
-                viewModel.gotoNoteDetailsScreen(bundle = null)
+            menuFab.setOnClickListener {
+                onMenuFabClicked()
+            }
+            logoutFab.setOnClickListener {
+                viewModel.removeCurrentUser()
+            }
+            newNoteFab.setOnClickListener {
+                viewModel.gotoNoteDetailsScreen(null)
             }
         }
         observeData()
     }
+
+    private fun onMenuFabClicked() {
+        binding.run {
+            if (!opened) {
+                logoutFab.visibility = View.VISIBLE
+                newNoteFab.visibility = View.VISIBLE
+                logoutFab.startAnimation(fromBottom)
+                newNoteFab.startAnimation(fromBottom)
+            } else {
+                logoutFab.startAnimation(toBottom)
+                newNoteFab.startAnimation(toBottom)
+                logoutFab.visibility = View.GONE
+                newNoteFab.visibility = View.GONE
+            }
+        }
+        opened = !opened
+    }
+
 
     override fun onResume() {
         super.onResume()
