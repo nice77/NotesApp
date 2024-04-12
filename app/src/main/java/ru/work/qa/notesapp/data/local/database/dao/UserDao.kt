@@ -9,7 +9,7 @@ import ru.work.qa.notesapp.data.local.database.entity.UserWithNotes
 @Dao
 interface UserDao {
     @Insert
-    fun createUser(user : User)
+    fun createUser(user : User) : Long
 
     @Query("select 1 from users where users.email = :email")
     fun containsEmail(email : String) : Int?

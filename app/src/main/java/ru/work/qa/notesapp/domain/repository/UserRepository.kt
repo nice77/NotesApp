@@ -5,7 +5,7 @@ import ru.work.qa.notesapp.domain.model.UserWithNotesDomainModel
 
 interface UserRepository {
 
-    suspend fun createUser(userDomainModel: UserDomainModel)
+    suspend fun createUser(userDomainModel: UserDomainModel) : Long
 
     suspend fun containsEmail(email : String) : Boolean
 

@@ -13,8 +13,8 @@ class UserRepositoryImpl @Inject constructor(
     private val userDao: UserDao,
     private val localDataDomainModelMapper: LocalDataDomainModelMapper
 ) : UserRepository {
-    override suspend fun createUser(userDomainModel: UserDomainModel) {
-        withContext(Dispatchers.IO) {
+    override suspend fun createUser(userDomainModel: UserDomainModel) : Long {
+        return withContext(Dispatchers.IO) {
             userDao.createUser(localDataDomainModelMapper.mapDomainModelToUserEntity(userDomainModel))
         }
     }
