@@ -1,5 +1,6 @@
 package ru.work.qa.notesapp.presentation.ui.screens.homeScreen
 
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.view.View
 import android.widget.PopupMenu
@@ -10,7 +11,8 @@ import ru.work.qa.notesapp.domain.model.NoteDomainModel
 class NoteViewHolder(
     private val binding : ItemNoteBinding,
     private val onItemPressed: (NoteDomainModel) -> Unit,
-    private val onMenuButtonPressed: (NoteDomainModel, View) -> Unit
+    private val onMenuButtonPressed: (NoteDomainModel, View) -> Unit,
+    private val requireImageBitmap: (String) -> Bitmap?
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private var note: NoteDomainModel? = null
@@ -38,6 +40,11 @@ class NoteViewHolder(
         this.note = note
         binding.run {
             header.text = note.header
+            if (note.imagePath.isNotEmpty()) {
+                val bitmap = requireImageBitmap(note.imagePath)
+                println("Got bitmap: $bitmap")
+                image.setImageBitmap(bitmap)
+            }
         }
     }
 

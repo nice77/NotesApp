@@ -1,5 +1,6 @@
 package ru.work.qa.notesapp.presentation.ui.screens.homeScreen
 
+import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,13 +12,15 @@ import ru.work.qa.notesapp.domain.model.NoteDomainModel
 class NotesAdapter(
     val notesList : MutableList<NoteDomainModel>,
     private val onItemPressed: (NoteDomainModel) -> Unit,
-    private val onMenuButtonPressed: (NoteDomainModel, View) -> Unit
+    private val onMenuButtonPressed: (NoteDomainModel, View) -> Unit,
+    private val requireImageBitmap: (String) -> Bitmap?
 ) : RecyclerView.Adapter<NoteViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         return NoteViewHolder(
             binding = ItemNoteBinding.inflate(LayoutInflater.from(parent.context), parent, false),
             onItemPressed = onItemPressed,
-            onMenuButtonPressed = onMenuButtonPressed
+            onMenuButtonPressed = onMenuButtonPressed,
+            requireImageBitmap = requireImageBitmap
         )
     }
 

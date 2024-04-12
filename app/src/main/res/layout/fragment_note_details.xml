@@ -8,8 +8,9 @@
     <ImageView
         android:id="@+id/note_image"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
+        android:layout_height="wrap_content"
+        android:maxHeight="200dp"
+        android:scaleType="fitCenter"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -46,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5"/>
+        app:layout_constraintGuide_percent="0.6"/>
 
     <Button
         android:id="@+id/edit_btn"
@@ -73,7 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6"/>
+        app:layout_constraintGuide_percent="0.7"/>
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/extras_btn"

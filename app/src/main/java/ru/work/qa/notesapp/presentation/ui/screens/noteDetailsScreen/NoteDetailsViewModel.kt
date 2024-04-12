@@ -17,7 +17,7 @@ class NoteDetailsViewModel @AssistedInject constructor(
     private val deleteNoteUseCase: DeleteNoteUseCase,
     private val saveNoteUseCase: SaveNoteUseCase,
     private val getCurrentUserIdUseCase: GetCurrentUserIdUseCase,
-    private val nav: Nav,
+    private val nav: Nav
 ) : ViewModel() {
 
     @AssistedFactory
@@ -31,14 +31,14 @@ class NoteDetailsViewModel @AssistedInject constructor(
         }
     }
 
-    fun createNote(header: String, description: String) {
+    fun createNote(header: String, description: String, imagePath : String) {
         viewModelScope.launch {
             val noteDomainModel = NoteDomainModel(
                 id = 0,
                 userId = getCurrentUserIdUseCase(),
                 header = header,
                 description = description,
-                imagePath = ""
+                imagePath = imagePath
             )
             saveNoteUseCase(noteDomainModel)
         }

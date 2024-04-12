@@ -41,6 +41,6 @@ class HomeViewModel @AssistedInject constructor(
     }
 
     fun gotoNoteDetailsScreen(bundle: Bundle?) {
-        nav.gotoNoteDetailsScreen()
+        nav.gotoNoteDetailsScreen(bundle = bundle)
     }
 }

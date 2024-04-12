@@ -1,5 +1,8 @@
 package ru.work.qa.notesapp.presentation.ui.screens.homeScreen
 
+import android.annotation.SuppressLint
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.View
 import android.widget.PopupMenu
@@ -16,6 +19,8 @@ import ru.work.qa.notesapp.R
 import ru.work.qa.notesapp.databinding.FragmentHomeBinding
 import ru.work.qa.notesapp.di.AssistedViewModelFactory
 import ru.work.qa.notesapp.domain.model.NoteDomainModel
+import java.io.File
+
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
@@ -33,7 +38,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             notesRv.adapter = NotesAdapter(
                 notesList = mutableListOf(),
                 onItemPressed = ::onItemPressed,
-                onMenuButtonPressed = ::onMenuButtonPressed
+                onMenuButtonPressed = ::onMenuButtonPressed,
+                requireImageBitmap = ::requireImageBitmap
             )
             fab.setOnClickListener {
                 viewModel.gotoNoteDetailsScreen(bundle = null)
@@ -69,15 +75,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    fun onItemPressed(noteDomainModel: NoteDomainModel) {
+    private fun onItemPressed(noteDomainModel: NoteDomainModel) {
         viewModel.gotoNoteDetailsScreen(bundle = bundleOf(BUNDLE_KEY to noteDomainModel))
     }
 
-    fun deleteNote(noteDomainModel: NoteDomainModel) {
+    private fun deleteNote(noteDomainModel: NoteDomainModel) {
         viewModel.deleteNote(noteDomainModel)
     }
 
-    fun onMenuButtonPressed(noteDomainModel: NoteDomainModel, view: View) {
+    private fun onMenuButtonPressed(noteDomainModel: NoteDomainModel, view: View) {
         val menu = PopupMenu(requireContext(), view)
         menu.menuInflater.inflate(R.menu.popup_menu, menu.menu)
         menu.setOnMenuItemClickListener { item ->
@@ -92,6 +98,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         }
         menu.show()
+    }
+
+    @SuppressLint("WrongConstant")
+    fun requireImageBitmap(imagePath : String) : Bitmap? {
+        val imageFile = File(imagePath)
+        if (imageFile.exists()) {
+            return BitmapFactory.decodeFile(imagePath)
+        }
+        return null
     }
 
     companion object {

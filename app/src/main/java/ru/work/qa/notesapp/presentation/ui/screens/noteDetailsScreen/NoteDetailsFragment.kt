@@ -1,14 +1,18 @@
 package ru.work.qa.notesapp.presentation.ui.screens.noteDetailsScreen
 
+import android.app.Activity
+import android.content.Intent
+import android.database.Cursor
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.view.View
-import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import ru.work.qa.notesapp.App
 import ru.work.qa.notesapp.R
@@ -26,16 +30,7 @@ class NoteDetailsFragment : Fragment(R.layout.fragment_note_details) {
         }
     }
     private var noteDomainModel : NoteDomainModel? = null
-    val pickMedia =
-        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-            println("TEST TAG - $uri")
-            noteDomainModel?.let { noteDomainModel ->
-                uri?.let {
-                    noteDomainModel.imagePath = it.path!!
-                    println("TEST TAG - path: ${it.path}")
-                }
-            }
-        }
+    private var selectedPath : String = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -78,7 +73,8 @@ class NoteDetailsFragment : Fragment(R.layout.fragment_note_details) {
                 if (noteDomainModel == null) {
                     viewModel.createNote(
                         noteTitleEt.text.toString(),
-                        noteDescriptionEt.text.toString()
+                        noteDescriptionEt.text.toString(),
+                        selectedPath
                     )
                 } else {
                     noteDomainModel?.let {
@@ -93,13 +89,54 @@ class NoteDetailsFragment : Fragment(R.layout.fragment_note_details) {
                 }
             }
             pickImageBtn.setOnClickListener {
-                pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-                println("Path for content provider: ${noteDomainModel?.imagePath}")
+                startIntent()
             }
+        }
+    }
+
+    private fun startIntent() {
+        val intent = Intent()
+        intent.action = Intent.ACTION_PICK
+        val pictureDirectory = Environment.getExternalStorageDirectory()
+        val data = Uri.parse(pictureDirectory.path)
+        val type = "image/*"
+        intent.setDataAndType(data, type)
+        startActivityForResult(intent, IMAGE_REQUEST_CODE)
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK){
+            data?.data?.also { uri ->
+                val fullPath = fetchFullPath(uri).getOrNull() ?: ""
+                println("Got full path: $fullPath")
+                noteDomainModel?.let {
+                    it.imagePath = fullPath
+                }
+                selectedPath = fullPath
+                println("Selected path: $selectedPath")
+            }
+        }
+    }
+
+    private fun fetchFullPath(uri : Uri) : Result<String?> {
+        var cursor: Cursor? = null
+        return runCatching {
+            val proj = arrayOf(MediaStore.Images.Media.DATA)
+            cursor = requireContext().contentResolver.query(uri, proj, null, null, null)
+            cursor?.let {
+                val columnIndex = it.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+                it.moveToFirst()
+                return@let it.getString(columnIndex)
+            }
+        }.onSuccess {
+            cursor?.close()
         }
     }
 
     companion object {
         private const val BUNDLE_KEY = "BUNDLE_KEY"
+        private const val IMAGE_REQUEST_CODE = 102
     }
 }
